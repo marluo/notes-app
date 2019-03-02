@@ -37,28 +37,24 @@ const removeNote = (id) => {
 // Generate the DOM structure for a note
 
 const generateDOM = (note) => {
-    const noteEl = document.createElement('div')
-    const textEl = document.createElement('span')
-    const anchor = document.createElement('a')
+    const noteEl = document.createElement('a')
+    const anchor = document.createElement('p')
     const button = document.createElement('button')
-    const checkbox = document.createElement('input')
-
-    anchor.href = `/edit.html#${note.id}`
+    const status = document.createElement('p')
 
 
 
-    // setup the remove note button
-    button.textContent = 'x'
+    // anchor.href = `/edit.html#${note.id}`
+    // setup the remove note button 
+    /*button.textContent = 'x'
     noteEl.appendChild(button)
     button.addEventListener('click',(e) => { //när man klickar på X
         console.log(note)
         removeNote(note.id) //eftersom att den skapar upp alla IDS när siten refreshas så fungerar detta.
         saveNotes(notes) //saves to localstorage
         renderNotes(notes, filters)
-    })
+    })*/
 
-
-    anchor.innerText
 
     //setup the note title text
     if (note.title.length > 0) {
@@ -71,8 +67,17 @@ const generateDOM = (note) => {
         //sparar i noteEl.textContet element (HTML) = 'Unnamed Note'.
     }
 
-
+    anchor.classList.add('list-item_title')
     noteEl.appendChild(anchor)
+
+
+    //Setup the link
+    noteEl.href = `/edit.html#${note.id}`
+    noteEl.classList.add('list-item')
+
+    status.textContent = updateEdited(note.editedAt)
+    status.classList.add('list-item__subtitle')
+    noteEl.appendChild(status)
 
     return noteEl
     //returnera noteEL från det som sparades
@@ -142,13 +147,21 @@ const renderNotes = (notes, filters) => {
 
     document.querySelector("#notes").innerHTML = ''
 
+    if(filteredNotes.length > 0) {
+        filteredNotes.forEach((note) => {
+            //forEacha filteredNotes (varje property)
+            const noteEl = generateDOM(note)
+            //kör funktionen generateDOM(note) och spara i noteEL
+            document.querySelector('#notes').appendChild(noteEl)
+        })
 
-    filteredNotes.forEach((note) => {
-        //forEacha filteredNotes (varje property)
-        const noteEl = generateDOM(note)
-        //kör funktionen generateDOM(note) och spara i noteEL
-        document.querySelector('#notes').appendChild(noteEl)
-    })
+    } else {
+        const empty = document.createElement('p')
+        empty.textContent ="Nothing"
+        empty.classList.add('empty-message')
+        document.querySelector('#notes').appendChild(empty)
+    }
+
 
 }
 

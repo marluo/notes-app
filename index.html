@@ -2,23 +2,31 @@
 
 <html>
     <head>
-
+        <link href="styles.css" rel="stylesheet">
     </head>
 
     <body>
-    <h1> Notes App </h1>
-    <h2> asdasdads </h2>
-    <h3> <a href=/edit.html> My text for the link </a></h3>
-
-    <input id="search-text" type="text" placeholder="filter notes"><br>
-    <select id='filterDropDown'>
-        <option value="byEdited">Sort by last edited</option>
-        <option value="byCreated">Sort by recently created</option>
-        <option value="alphabetical">Sory Alphabetically</option>
-    </select>
-    <div id="notes">
+    <div class="header">
+        <div class="container">
+            <h1 class="header__title"> Notes App </h1>
+            <h2 class="header__subtitle"> take notes and never forget </h2>
+        </div>
     </div>
-    <button id="create-note">Create Note </button>
+    <div class="actions">
+        <div class="actions__container">
+            <input id="search-text" type="text" class="input" placeholder="filter notes">
+            <select id='filterDropDown' class="dropdown">
+                <option value="byEdited">Sort by last edited</option>
+                <option value="byCreated">Sort by recently created</option>
+                <option value="alphabetical">Sory Alphabetically</option>
+            </select>
+        </div>
+    </div>
+    <div class="container">
+            <div id="notes">
+    </div>
+    <button id="create-note" class="button">Create Note</button>
+    </div>
     <script src="uuid.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment-with-locales.min.js"> </script>
     <script src="notes_func.js"></script>
